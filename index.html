@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 id="text">Users / deleted users will be saved in localStorage using Javascript. You can refresh the page after adding new users and you'll see.</h1>
     <div id="principal">
+        <h1>Add a specific user</h1>
         <input type="text" id="username" placeholder="Username...">
         <input type="button" onclick="addUser();" value="Add user">
     </div>
+    <div id="other">
+        <h1>Generate Random Users</h1>
+        <input type="text" id="usersLength" placeholder="Number of users">
+        <input type="button" onclick="generateUsers();" value="Generate Users">
+    </div>
+    <h1>All Users:</h1>
     <div id="users"></div>
     <script src="app.js"></script>
 </body>

@@ -1,12 +1,21 @@
 #user {
     display: flex;
     align-items: center;
-    border: 2.5px dashed green;
+    border: 1px solid green;
     padding: 10px;
+    margin: 10px 0;
+    background: lightgreen;
+    justify-content: space-between;
+    border-radius: 5px;
 }
 
-#principal {
-    margin-bottom: 25px;
+#text {
+    border: 1px solid black;
+    background: white;
+    color: grey;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 * {
@@ -14,17 +23,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1 {
-    margin: 0;
-    padding: 10px;
-}
-
-#options {
-    margin-left: 5%;
-}
-
 #name {
     font-weight: bold;
+    color: grey;
 }
 
 button {
@@ -38,4 +39,5 @@ button {
 
 #delete {
     background: red;
+    margin-left: 20px;
 }

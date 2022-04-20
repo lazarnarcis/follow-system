@@ -1,6 +1,41 @@
 let divUsers = document.querySelector("#users");
+let users = localStorage.getItem("users") || [];
 
-let users = [];
+function parseJSON (element) {
+    const elementReturned = JSON.parse(element);
+    return elementReturned;
+}
+
+users = parseJSON(users);
+
+function generateNumber (min, max) {
+    return Math.floor((Math.random() * (max - min)) + min);
+}
+
+function generateUser (text, userLength) {
+    let randomText = "";
+    for (let i = 1; i <= userLength; i++) {
+        randomText += text[generateNumber(0, text.length)];
+    }
+    return randomText;
+} 
+
+function generateUsers () {
+    let usersLength = document.querySelector("#usersLength").value;
+    if (usersLength == "" || usersLength < 1 || usersLength > 10) {
+        alert("Unaccepted value!");
+        return;
+    }
+    let abc = 'qwertyuiopasdfghjklzxcvbnm1234567890';
+
+    for (let i = 1; i <= usersLength; i++) {
+        let username = generateUser(abc, 8);
+        let user = userSyntax(username);
+        users = [user, ...users];
+        localStorage.setItem("users", JSON.stringify(users));
+        showUsers();
+    }
+}
 
 function showUsers () {
     divUsers.innerHTML = "";
@@ -27,12 +62,10 @@ function showUsers () {
             followText = "Follow";
         }
         buttonFollow.innerHTML = followText;
+
         buttonFollow.addEventListener("click", () => {
-            if (users[i].follow) {
-                users[i].follow = false;
-            } else {
-                users[i].follow = true;
-            }
+            setFollow(i);
+            localStorage.setItem("users", JSON.stringify(users));
             showUsers();
         });
         divOptions.appendChild(buttonFollow);
@@ -42,9 +75,18 @@ function showUsers () {
         buttonDelete.innerHTML = "Delete User";
         buttonDelete.addEventListener("click", () => {
             users.splice(users.indexOf(users[i]), 1);
+            localStorage.setItem("users", JSON.stringify(users));
             showUsers();
         });
         divOptions.appendChild(buttonDelete);
+    }
+}
+
+function setFollow(i) {
+    if (users[i].follow) {
+        users[i].follow = false;
+    } else {
+        users[i].follow = true;
     }
 }
 
@@ -55,12 +97,19 @@ function addUser () {
     if (inputValue == "") {
         alert("Please enter a username!");
     } else {
-        let user = {
-            name: inputValue,
-            follow: false
-        };
+        let user = userSyntax(inputValue);
         users = [user, ...users];
+        localStorage.setItem("users", JSON.stringify(users));
         showUsers();
         input.value = "";
     }
 }
+
+function userSyntax(inputValue) {
+    return {
+        name: inputValue,
+        follow: false
+    };
+}
+
+showUsers();
