@@ -1,6 +1,14 @@
 let divUsers = document.querySelector("#users");
 let users = localStorage.getItem("users") || [];
 
+document.querySelector("#username").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") addUser();
+});
+
+document.querySelector("#usersLength").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") generateUsers();
+});
+
 function parseJSON (element) {
     const elementReturned = JSON.parse(element);
     return elementReturned;
@@ -35,6 +43,7 @@ function generateUsers () {
         localStorage.setItem("users", JSON.stringify(users));
         showUsers();
     }
+    document.querySelector("#usersLength").value = "";
 }
 
 function showUsers () {
